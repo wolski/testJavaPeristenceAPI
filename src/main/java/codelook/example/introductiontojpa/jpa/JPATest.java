@@ -1,6 +1,8 @@
 package codelook.example.introductiontojpa.jpa;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,6 +13,9 @@ import javax.persistence.Query;
 public class JPATest {
 
 	public void performJPA() {
+		Map addedOrOverridenProperties = new HashMap();
+		addedOrOverridenProperties.put("javax.persistence.jdbc.url", "jdbc:sqlite:sample.db");
+		//properties.put("javax.persistence.jdbc.user", dbUser); //if needed
 
 		// Creating objects representing some products
 		Product product1 = new Product();
@@ -23,8 +28,7 @@ public class JPATest {
 
 		// Connecting to the database through EntityManagerFactory
 		// connection details loaded from persistence.xml
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-test");
-
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-test",addedOrOverridenProperties);
 		EntityManager em = emf.createEntityManager();
 
 		// Creating a new transaction
